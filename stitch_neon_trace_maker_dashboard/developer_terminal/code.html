@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .ease-mono { transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); }
+    .bg-grid {
+      background-size: 20px 20px;
+      background-image: radial-gradient(circle, #2a2a2a 1px, transparent 1px);
+    }
+    .circuit-trace-h {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #3c4b35, transparent);
+    }
+    .circuit-trace-v {
+      width: 1px;
+      background: linear-gradient(180deg, transparent, #3c4b35, transparent);
+    }
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: #0c1609; }
+    ::-webkit-scrollbar-thumb { background: #39ff14; border-radius: 2px; }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "background": "#0c1609",
+            "tertiary": "#fff8f7",
+            "inverse-on-surface": "#293324",
+            "on-primary-fixed-variant": "#095300",
+            "on-primary-fixed": "#022100",
+            "on-error-container": "#ffdad6",
+            "primary-fixed": "#79ff5b",
+            "surface-container-high": "#222d1e",
+            "on-secondary-container": "#00686f",
+            "on-primary": "#053900",
+            "on-tertiary": "#442927",
+            "secondary-fixed-dim": "#00dbe9",
+            "inverse-surface": "#dae6d0",
+            "tertiary-fixed": "#ffdad6",
+            "on-surface-variant": "#baccb0",
+            "error-container": "#93000a",
+            "on-surface": "#dae6d0",
+            "secondary": "#d3fbff",
+            "on-tertiary-fixed": "#2c1513",
+            "outline": "#85967c",
+            "on-primary-container": "#107100",
+            "error": "#ffb4ab",
+            "surface-container-low": "#141e11",
+            "surface-tint": "#2ae500",
+            "surface-bright": "#323c2d",
+            "on-tertiary-container": "#7a5955",
+            "tertiary-fixed-dim": "#e7bdb8",
+            "on-secondary-fixed": "#002022",
+            "surface": "#0c1609",
+            "on-background": "#dae6d0",
+            "on-secondary": "#00363a",
+            "surface-dim": "#0c1609",
+            "secondary-fixed": "#7df4ff",
+            "on-tertiary-fixed-variant": "#5d3f3c",
+            "on-secondary-fixed-variant": "#004f54",
+            "tertiary-container": "#ffd3ce",
+            "on-error": "#690005",
+            "primary-fixed-dim": "#2ae500",
+            "surface-variant": "#2d3828",
+            "inverse-primary": "#106e00",
+            "surface-container-highest": "#2d3828",
+            "secondary-container": "#00eefc",
+            "surface-container-lowest": "#071105",
+            "primary-container": "#39ff14",
+            "outline-variant": "#3c4b35",
+            "primary": "#efffe3",
+            "surface-container": "#182214"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "lg": "24px",
+            "sm": "8px",
+            "container-max": "1440px",
+            "xl": "40px",
+            "unit": "4px",
+            "xs": "4px",
+            "md": "16px",
+            "grid-gutter": "20px"
+          },
+          "fontFamily": {
+            "h2": ["Space Grotesk"],
+            "label-caps": ["Space Grotesk"],
+            "h1": ["Space Grotesk"],
+            "body-lg": ["Inter"],
+            "h3": ["Space Grotesk"],
+            "body-md": ["Inter"],
+            "code-sm": ["Space Grotesk"]
+          },
+          "fontSize": {
+            "h2": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+            "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+            "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "500"}],
+            "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+            "code-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden selection:bg-primary-container/30 selection:text-primary-fixed">
+<div class="fixed inset-0 bg-grid opacity-20 pointer-events-none"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800 shadow-[0_0_15px_rgba(57,255,20,0.1)]">
+<div class="flex items-center space-x-8">
+<span class="text-lime-400 font-black tracking-tighter text-xl">MAKER_OS_v1.0.4</span>
+<nav class="hidden md:flex space-x-6 font-['Space_Grotesk'] uppercase tracking-widest text-xs">
+<a class="text-zinc-500 hover:text-lime-300 hover:shadow-[0_0_8px_rgba(57,255,20,0.4)] transition-all duration-200 ease-mono" href="#">Command Center</a>
+<a class="text-zinc-500 hover:text-lime-300 hover:shadow-[0_0_8px_rgba(57,255,20,0.4)] transition-all duration-200 ease-mono" href="#">Component Finder</a>
+<a class="text-lime-400 brightness-125 transition-all duration-200 ease-mono" href="#">Developer Terminal</a>
+<a class="text-zinc-500 hover:text-lime-300 hover:shadow-[0_0_8px_rgba(57,255,20,0.4)] transition-all duration-200 ease-mono" href="#">Schematic Lab</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-sm">search</span>
+<input class="bg-zinc-900/50 border border-zinc-800 text-xs font-['Space_Grotesk'] px-9 py-1.5 rounded focus:outline-none focus:border-lime-400 transition-colors w-48" placeholder="QUERY_SYSTEM..." type="text"/>
+</div>
+<span class="material-symbols-outlined text-lime-400 hover:text-lime-300 cursor-pointer" data-icon="sensors">sensors</span>
+<span class="material-symbols-outlined text-lime-400 hover:text-lime-300 cursor-pointer" data-icon="memory">memory</span>
+<span class="material-symbols-outlined text-lime-400 hover:text-lime-300 cursor-pointer" data-icon="settings_input_component">settings_input_component</span>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col pt-20 pb-8 border-r border-zinc-800 z-40 bg-zinc-950 w-64">
+<div class="px-6 mb-8">
+<div class="flex items-center space-x-3 mb-2">
+<div class="w-10 h-10 border border-lime-400/30 p-0.5 rounded-sm">
+<img alt="System Operator Avatar" class="w-full h-full object-cover grayscale brightness-75 contrast-125" data-alt="A futuristic close-up of a digital human profile rendered in high-contrast grayscale with green digital scan lines. The image is framed by minimalist UI technical data such as hexadecimal codes and biometric waveforms. The aesthetic is inspired by cybernetic brutality and midnight laboratory themes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA50Kf4QiZ-UTgbjHnW3RslRuQD7emLwudylgX0VAS4fitCsle5_cc98qsP_DntJNWF8XsYXdot5Ce9vNx3zK739nhWcGC61E2KJu_c8_L3Az4-72aZwndY2SBYGmSNM2CPfq7GGyinbWc42Q1GJTZq2QXepLap-9Im3taYzcPPwqrj56JDllzF0MUjLoFAzj7kLy6m7mT5dCdKJbqfSUAwWvlT0MGXB_CL6Ab9QRPM-L4460VIZQrnjomPB84dqOQ8bR7myiL5skXw"/>
+</div>
+<div>
+<h4 class="text-lime-400 font-bold font-['Space_Grotesk'] text-sm tracking-tighter">OPERATOR_01</h4>
+<p class="text-[10px] text-zinc-500 font-mono tracking-widest">MK-SYS ONLINE</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 px-2 font-['Space_Grotesk'] text-[11px] font-medium tracking-tight uppercase">
+<a class="flex items-center space-x-3 text-zinc-600 py-3 px-4 hover:bg-zinc-900 hover:text-lime-200 transition-colors duration-150 cursor-crosshair" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard_customize">dashboard_customize</span>
+<span>Command Center</span>
+</a>
+<a class="flex items-center space-x-3 text-zinc-600 py-3 px-4 hover:bg-zinc-900 hover:text-lime-200 transition-colors duration-150 cursor-crosshair" href="#">
+<span class="material-symbols-outlined" data-icon="memory">memory</span>
+<span>Component Finder</span>
+</a>
+<a class="flex items-center space-x-3 text-lime-400 bg-lime-400/10 border-l-4 border-lime-400 py-3 px-4 shadow-[inset_0_0_10px_rgba(57,255,20,0.1)] cursor-crosshair" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span>Developer Terminal</span>
+</a>
+<a class="flex items-center space-x-3 text-zinc-600 py-3 px-4 hover:bg-zinc-900 hover:text-lime-200 transition-colors duration-150 cursor-crosshair" href="#">
+<span class="material-symbols-outlined" data-icon="schema">schema</span>
+<span>Schematic Lab</span>
+</a>
+</nav>
+<div class="px-2 space-y-1 pt-8 border-t border-zinc-900 font-['Space_Grotesk'] text-[11px] font-medium tracking-tight uppercase">
+<a class="flex items-center space-x-3 text-zinc-600 py-3 px-4 hover:bg-zinc-900 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined" data-icon="biotech">biotech</span>
+<span>Diagnostics</span>
+</a>
+<a class="flex items-center space-x-3 text-zinc-600 py-3 px-4 hover:bg-zinc-900 hover:text-lime-200" href="#">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span>Logs</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 pt-16 h-screen flex flex-col relative overflow-hidden">
+<!-- Top Bar / Workspace Header -->
+<div class="h-12 border-b border-zinc-800 flex items-center justify-between px-6 bg-surface-container-low">
+<div class="flex items-center space-x-4">
+<span class="font-label-caps text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-xs mr-2" data-icon="folder_open">folder_open</span>
+          PROJECTS / LIBS / ESP32_WS_01
+        </span>
+<div class="h-4 circuit-trace-v opacity-30"></div>
+<span class="font-code-sm text-lime-400 font-medium">main_controller.cpp</span>
+</div>
+<div class="flex items-center space-x-2">
+<button class="bg-background border border-lime-400 text-lime-400 font-label-caps px-4 py-1.5 hover:shadow-[0_0_8px_rgba(57,255,20,0.4)] transition-all flex items-center">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="content_copy">content_copy</span>
+          COPY_SNIPPET
+        </button>
+<button class="bg-primary-container/20 border border-primary-container text-primary-fixed font-label-caps px-4 py-1.5 hover:bg-primary-container/40 transition-all flex items-center">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="play_arrow">play_arrow</span>
+          RUN_SYST
+        </button>
+</div>
+</div>
+<!-- Layout Split -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Snippet Explorer Sidebar -->
+<div class="w-64 border-r border-zinc-800 bg-surface-container-lowest flex flex-col">
+<div class="p-4 border-b border-zinc-800">
+<div class="relative">
+<input class="w-full bg-zinc-900 border-none text-[10px] font-mono p-2 focus:ring-1 focus:ring-lime-400" placeholder="FILTER_LIBS..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-4">
+<!-- Library Category -->
+<div>
+<div class="flex items-center justify-between px-2 mb-2">
+<span class="font-label-caps text-on-surface-variant text-[10px]">ARDUINO_CORE</span>
+<span class="text-xs text-zinc-700">012</span>
+</div>
+<ul class="space-y-1">
+<li class="group flex items-center px-2 py-1.5 bg-lime-400/5 border-l-2 border-lime-400">
+<span class="material-symbols-outlined text-sm mr-2 text-lime-400" data-icon="code">code</span>
+<span class="font-code-sm text-lime-400 text-xs truncate">blink_pulse.ino</span>
+</li>
+<li class="group flex items-center px-2 py-1.5 hover:bg-zinc-900 transition-colors">
+<span class="material-symbols-outlined text-sm mr-2 text-zinc-600" data-icon="code">code</span>
+<span class="font-code-sm text-zinc-400 text-xs truncate">i2c_scanner.ino</span>
+</li>
+<li class="group flex items-center px-2 py-1.5 hover:bg-zinc-900 transition-colors">
+<span class="material-symbols-outlined text-sm mr-2 text-zinc-600" data-icon="code">code</span>
+<span class="font-code-sm text-zinc-400 text-xs truncate">pwm_fade.ino</span>
+</li>
+</ul>
+</div>
+<!-- Library Category -->
+<div>
+<div class="flex items-center justify-between px-2 mb-2">
+<span class="font-label-caps text-on-surface-variant text-[10px]">ESP32_DRIVERS</span>
+<span class="text-xs text-zinc-700">008</span>
+</div>
+<ul class="space-y-1">
+<li class="group flex items-center px-2 py-1.5 hover:bg-zinc-900 transition-colors">
+<span class="material-symbols-outlined text-sm mr-2 text-secondary-fixed-dim" data-icon="wifi">wifi</span>
+<span class="font-code-sm text-zinc-400 text-xs truncate">wifi_provisioning.h</span>
+</li>
+<li class="group flex items-center px-2 py-1.5 hover:bg-zinc-900 transition-colors">
+<span class="material-symbols-outlined text-sm mr-2 text-secondary-fixed-dim" data-icon="bluetooth">bluetooth</span>
+<span class="font-code-sm text-zinc-400 text-xs truncate">ble_notify.cpp</span>
+</li>
+<li class="group flex items-center px-2 py-1.5 hover:bg-zinc-900 transition-colors">
+<span class="material-symbols-outlined text-sm mr-2 text-zinc-600" data-icon="settings_input_hdmi">settings_input_hdmi</span>
+<span class="font-code-sm text-zinc-400 text-xs truncate">spi_display.cpp</span>
+</li>
+</ul>
+</div>
+<!-- Library Category -->
+<div>
+<div class="flex items-center justify-between px-2 mb-2">
+<span class="font-label-caps text-on-surface-variant text-[10px]">PYTHON_SCRIPTS</span>
+<span class="text-xs text-zinc-700">004</span>
+</div>
+<ul class="space-y-1">
+<li class="group flex items-center px-2 py-1.5 hover:bg-zinc-900 transition-colors">
+<span class="material-symbols-outlined text-sm mr-2 text-tertiary-fixed-dim" data-icon="description">description</span>
+<span class="font-code-sm text-zinc-400 text-xs truncate">serial_logger.py</span>
+</li>
+<li class="group flex items-center px-2 py-1.5 hover:bg-zinc-900 transition-colors">
+<span class="material-symbols-outlined text-sm mr-2 text-tertiary-fixed-dim" data-icon="description">description</span>
+<span class="font-code-sm text-zinc-400 text-xs truncate">data_viz.py</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Main Editor Surface -->
+<div class="flex-1 flex flex-col bg-background">
+<!-- Editor Content -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Gutter -->
+<div class="w-12 bg-surface-container-lowest border-r border-zinc-800 flex flex-col items-center pt-4 space-y-1 font-mono text-[10px] text-zinc-600">
+<span>001</span><span>002</span><span>003</span><span>004</span><span>005</span><span>006</span><span>007</span><span>008</span><span>009</span><span>010</span>
+<span>011</span><span>012</span><span>013</span><span class="text-lime-400 bg-lime-400/10 w-full text-center">014</span><span>015</span><span>016</span><span>017</span>
+</div>
+<!-- Code Canvas -->
+<div class="flex-1 p-4 font-mono text-sm leading-relaxed overflow-y-auto">
+<pre class="whitespace-pre"><span class="text-zinc-600">// ESP32 Main Controller v1.0.4</span>
+<span class="text-secondary-fixed-dim">#include</span> <span class="text-tertiary-fixed-dim">&lt;WiFi.h&gt;</span>
+<span class="text-secondary-fixed-dim">#include</span> <span class="text-tertiary-fixed-dim">&lt;HTTPClient.h&gt;</span>
+
+<span class="text-lime-400">const char*</span> ssid = <span class="text-secondary-fixed-dim">"MK_LAB_5G"</span>;
+<span class="text-lime-400">const char*</span> password = <span class="text-secondary-fixed-dim">"SECURE_GATEWAY_88"</span>;
+
+<span class="text-lime-400">void</span> <span class="text-secondary-container">setup</span>() {
+  <span class="text-on-surface-variant">Serial</span>.<span class="text-secondary-container">begin</span>(<span class="text-secondary-fixed-dim">115200</span>);
+  <span class="text-on-surface-variant">WiFi</span>.<span class="text-secondary-container">begin</span>(ssid, password);
+  
+  <span class="text-zinc-500">while</span> (<span class="text-on-surface-variant">WiFi</span>.<span class="text-secondary-container">status</span>() != <span class="text-primary-fixed-dim">WL_CONNECTED</span>) {
+    <span class="text-secondary-container">delay</span>(<span class="text-secondary-fixed-dim">500</span>);
+    <span class="text-on-surface-variant">Serial</span>.<span class="text-secondary-container">print</span>(<span class="text-secondary-fixed-dim">"."</span>);
+  }
+}
+
+<span class="text-lime-400">void</span> <span class="text-secondary-container">loop</span>() {
+  <span class="text-zinc-600">// Core loop execution logic</span>
+  <span class="text-zinc-500">if</span> (<span class="text-on-surface-variant">WiFi</span>.<span class="text-secondary-container">status</span>() == <span class="text-primary-fixed-dim">WL_CONNECTED</span>) {
+    <span class="text-on-surface-variant">HTTPClient</span> http;
+    http.<span class="text-secondary-container">begin</span>(<span class="text-secondary-fixed-dim">"http://api.makeros.v1/telemetry"</span>);
+    <span class="text-lime-400">int</span> httpCode = http.<span class="text-secondary-container">GET</span>();
+    <span class="text-zinc-600">/* ... processing ... */</span>
+  }
+}
+</pre>
+</div>
+</div>
+<!-- Terminal Logs (HUD Style) -->
+<div class="h-48 border-t border-zinc-800 bg-black/40 backdrop-blur-sm p-4 relative">
+<div class="absolute top-0 right-6 -translate-y-1/2 bg-zinc-800 px-3 py-0.5 rounded-full flex items-center space-x-2">
+<span class="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse"></span>
+<span class="font-label-caps text-[9px] text-zinc-300">LIVE_TELEMETRY</span>
+</div>
+<div class="flex items-center space-x-4 mb-3 border-b border-zinc-900 pb-2">
+<button class="text-lime-400 font-label-caps text-[10px] border-b border-lime-400">TERMINAL_01</button>
+<button class="text-zinc-500 font-label-caps text-[10px] hover:text-zinc-300 transition-colors">DEBUG_CONSOLE</button>
+<button class="text-zinc-500 font-label-caps text-[10px] hover:text-zinc-300 transition-colors">SERIAL_MONITOR</button>
+<div class="flex-1"></div>
+<span class="material-symbols-outlined text-zinc-600 text-sm cursor-pointer" data-icon="delete">delete</span>
+</div>
+<div class="overflow-y-auto h-28 font-mono text-[11px] space-y-1">
+<div class="flex space-x-3">
+<span class="text-zinc-600">[14:22:01]</span>
+<span class="text-secondary-fixed-dim">INF</span>
+<span class="text-zinc-400">Initializing ESP32-WROOM-32 Bootloader...</span>
+</div>
+<div class="flex space-x-3">
+<span class="text-zinc-600">[14:22:02]</span>
+<span class="text-secondary-fixed-dim">INF</span>
+<span class="text-zinc-400">Loading MK_CORE filesystem (LittleFS)... OK.</span>
+</div>
+<div class="flex space-x-3">
+<span class="text-zinc-600">[14:22:02]</span>
+<span class="text-primary-fixed-dim">NET</span>
+<span class="text-lime-400">WiFi handshake initiated. Searching for 'MK_LAB_5G'...</span>
+</div>
+<div class="flex space-x-3">
+<span class="text-zinc-600">[14:22:05]</span>
+<span class="text-primary-fixed-dim">NET</span>
+<span class="text-lime-400">Connected. IP: 192.168.1.144 | RSSI: -42dBm</span>
+</div>
+<div class="flex space-x-3 bg-red-500/5">
+<span class="text-zinc-600">[14:22:10]</span>
+<span class="text-error">ERR</span>
+<span class="text-error">UART Buffer Overflow at 0x400D21A4. Auto-clearing...</span>
+</div>
+<div class="flex space-x-3">
+<span class="text-zinc-600">[14:22:11]</span>
+<span class="text-secondary-fixed-dim">INF</span>
+<span class="text-zinc-400">System stabilized. Heartbeat active.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right HUD Panel / Metrics -->
+<div class="w-72 border-l border-zinc-800 bg-surface-container-lowest p-6 space-y-8 hidden xl:block">
+<!-- Resource Monitor -->
+<div>
+<h5 class="font-label-caps text-on-surface-variant text-[10px] mb-4">BOARD_RESOURCES</h5>
+<div class="space-y-4">
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-mono">
+<span class="text-zinc-500 uppercase">Flash usage</span>
+<span class="text-lime-400">42%</span>
+</div>
+<div class="h-1 bg-zinc-900 overflow-hidden">
+<div class="h-full bg-lime-400" style="width: 42%;"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-mono">
+<span class="text-zinc-500 uppercase">Heap Memory</span>
+<span class="text-secondary-fixed-dim">18%</span>
+</div>
+<div class="h-1 bg-zinc-900 overflow-hidden">
+<div class="h-full bg-secondary-fixed-dim" style="width: 18%;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="circuit-trace-h opacity-20"></div>
+<!-- Connection Diagram (Decorative Component) -->
+<div>
+<h5 class="font-label-caps text-on-surface-variant text-[10px] mb-4">PINOUT_SCHEMATIC_PREVIEW</h5>
+<div class="aspect-square border border-zinc-800 bg-background relative overflow-hidden group">
+<img alt="MCU Pinout Diagram" class="w-full h-full object-contain opacity-40 mix-blend-screen grayscale contrast-150" data-alt="A highly detailed technical blueprint of a microcontroller chip showing complex circuit traces, pin assignments, and internal logic gates. The aesthetic is futuristic and clinical, featuring neon green highlights on a deep black background with mathematical notation and engineering symbols scattered throughout the layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn9mG24-2nYoloQyxb_G5vZyLPTfjgq0eFMPvlXky9bmt_iQhdMitHrxEiaCK6mTyvpwoAjKW3rOSzbPoDfLTBJdLRqv8x865m-ORfR5RSWsnoo8jJw0dDRCAcUqHDIzaNGFQl9JWvwKOYZ4CAriPEYwqtN0pp-6Nk4Wpj9X9IJ7YFHYIOwionD1NHUZWmioGY7Rl6wksNcgvDbMpB0obUp_x3xq3xinJY5z9DNZXVJ0H0uQ4gj8LCtptn_KF5eu4E7U4MLVqv4HLN"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-lime-400 text-4xl opacity-20 group-hover:opacity-100 transition-opacity" data-icon="fullscreen">fullscreen</span>
+</div>
+<!-- HUD Corners -->
+<div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-lime-400/50"></div>
+<div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-lime-400/50"></div>
+<div class="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-lime-400/50"></div>
+<div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-lime-400/50"></div>
+</div>
+</div>
+<!-- Documentation Card -->
+<div class="p-4 border border-zinc-800 bg-zinc-900/30">
+<div class="flex items-center space-x-2 mb-2">
+<span class="material-symbols-outlined text-lime-400 text-sm" data-icon="help_outline">help_outline</span>
+<span class="font-label-caps text-[10px] text-zinc-300">QUICK_REFERENCE</span>
+</div>
+<p class="text-[11px] text-zinc-500 leading-relaxed font-mono">
+            SPI communication requires MOSI (GPIO 23), MISO (GPIO 19), and CLK (GPIO 18). Ensure common ground for serial debugging.
+          </p>
+<a class="mt-3 block text-[10px] text-lime-400 hover:underline font-bold uppercase tracking-tighter" href="#">View Full Doc &gt;&gt;</a>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Visual Anchor -->
+<footer class="fixed bottom-0 left-64 right-0 h-6 bg-zinc-950 border-t border-zinc-800 flex items-center justify-between px-6 z-50">
+<div class="flex items-center space-x-4">
+<div class="flex items-center space-x-1.5">
+<span class="w-2 h-2 rounded-full bg-lime-400"></span>
+<span class="text-[9px] font-mono text-zinc-400">NODE_LOCAL: ONLINE</span>
+</div>
+<div class="h-3 w-[1px] bg-zinc-800"></div>
+<span class="text-[9px] font-mono text-zinc-500">BAUD: 115200</span>
+<span class="text-[9px] font-mono text-zinc-500">UTF-8</span>
+</div>
+<div class="text-[9px] font-mono text-zinc-500 flex items-center space-x-4">
+<span>CPU_TEMP: 42°C</span>
+<span>UTF-8</span>
+<span class="text-lime-400">MASTER_READY</span>
+</div>
+</footer>
+</body></html>

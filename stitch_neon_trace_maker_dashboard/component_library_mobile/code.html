@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0c1609;
+            background-image: radial-gradient(#1a2e14 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .circuit-line {
+            position: absolute;
+            background: #39FF14;
+            opacity: 0.2;
+        }
+        .glow-border {
+            box-shadow: 0 0 8px rgba(57, 255, 20, 0.2);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-container": "#00686f",
+                        "on-primary": "#053900",
+                        "secondary-fixed-dim": "#00dbe9",
+                        "on-tertiary": "#442927",
+                        "background": "#0c1609",
+                        "tertiary": "#fff8f7",
+                        "on-primary-fixed-variant": "#095300",
+                        "inverse-on-surface": "#293324",
+                        "on-primary-fixed": "#022100",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#222d1e",
+                        "primary-fixed": "#79ff5b",
+                        "outline": "#85967c",
+                        "on-tertiary-fixed": "#2c1513",
+                        "on-primary-container": "#107100",
+                        "surface-container-low": "#141e11",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#2ae500",
+                        "inverse-surface": "#dae6d0",
+                        "tertiary-fixed": "#ffdad6",
+                        "on-surface-variant": "#baccb0",
+                        "on-surface": "#dae6d0",
+                        "error-container": "#93000a",
+                        "secondary": "#d3fbff",
+                        "on-background": "#dae6d0",
+                        "surface-dim": "#0c1609",
+                        "on-secondary": "#00363a",
+                        "secondary-fixed": "#7df4ff",
+                        "on-tertiary-fixed-variant": "#5d3f3c",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "surface-bright": "#323c2d",
+                        "on-tertiary-container": "#7a5955",
+                        "tertiary-fixed-dim": "#e7bdb8",
+                        "on-secondary-fixed": "#002022",
+                        "surface": "#0c1609",
+                        "primary-container": "#39ff14",
+                        "outline-variant": "#3c4b35",
+                        "primary": "#efffe3",
+                        "surface-container": "#182214",
+                        "tertiary-container": "#ffd3ce",
+                        "surface-variant": "#2d3828",
+                        "primary-fixed-dim": "#2ae500",
+                        "on-error": "#690005",
+                        "surface-container-highest": "#2d3828",
+                        "inverse-primary": "#106e00",
+                        "secondary-container": "#00eefc",
+                        "surface-container-lowest": "#071105"
+                    },
+                    fontFamily: {
+                        "h1": ["Space Grotesk"],
+                        "label-caps": ["Space Grotesk"],
+                        "h2": ["Space Grotesk"],
+                        "h3": ["Space Grotesk"],
+                        "body-md": ["Inter"],
+                        "code-sm": ["Space Grotesk"],
+                        "body-lg": ["Inter"]
+                    },
+                    fontSize: {
+                        "h1": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "h2": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h3": ["24px", { "lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "code-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen pb-24">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-zinc-950/90 backdrop-blur-md border-b border-[#2A2A2A]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#39FF14] text-lg">memory</span>
+<h1 class="font-h1 text-[12px] uppercase tracking-widest font-bold text-[#39FF14] drop-shadow-[0_0_5px_rgba(57,255,20,0.5)]">
+                COMPONENT_ARCHIVE // v4.2.0
+            </h1>
+</div>
+<button class="w-8 h-8 flex items-center justify-center text-[#39FF14] hover:shadow-[0_0_8px_rgba(57,255,20,0.4)] transition-all active:scale-95">
+<span class="material-symbols-outlined">search</span>
+</button>
+</header>
+<main class="pt-16 px-4">
+<!-- Category Filter -->
+<div class="mt-4 mb-6">
+<div class="flex items-center justify-between mb-3">
+<span class="font-label-caps text-zinc-500 text-[10px]">FILTER_CATEGORIES</span>
+<div class="h-[1px] flex-grow ml-4 bg-[#2A2A2A]"></div>
+</div>
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+<button class="flex-shrink-0 px-4 py-1.5 border border-[#39FF14] bg-[#39FF14]/10 text-[#39FF14] font-label-caps text-[10px] rounded-sm transition-all">
+                    ALL_UNITS
+                </button>
+<button class="flex-shrink-0 px-4 py-1.5 border border-zinc-800 bg-zinc-900 text-zinc-400 font-label-caps text-[10px] rounded-sm hover:border-zinc-700 transition-all">
+                    MCU_UNITS
+                </button>
+<button class="flex-shrink-0 px-4 py-1.5 border border-zinc-800 bg-zinc-900 text-zinc-400 font-label-caps text-[10px] rounded-sm hover:border-zinc-700 transition-all">
+                    PASSIVES
+                </button>
+<button class="flex-shrink-0 px-4 py-1.5 border border-zinc-800 bg-zinc-900 text-zinc-400 font-label-caps text-[10px] rounded-sm hover:border-zinc-700 transition-all">
+                    SENSORS
+                </button>
+<button class="flex-shrink-0 px-4 py-1.5 border border-zinc-800 bg-zinc-900 text-zinc-400 font-label-caps text-[10px] rounded-sm hover:border-zinc-700 transition-all">
+                    POWER
+                </button>
+</div>
+</div>
+<!-- Component List -->
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="relative group">
+<div class="circuit-line w-full h-[1px] -top-2 left-0"></div>
+<div class="bg-zinc-950/80 border border-zinc-800 p-3 rounded-sm flex items-center gap-4 hover:border-[#39FF14]/50 transition-all active:scale-[0.98]">
+<div class="w-14 h-14 bg-zinc-900 border border-zinc-800 flex items-center justify-center p-1 overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A high-resolution macro photograph of a microchip soldered onto a black circuit board, featuring neon green copper traces. The lighting is clinical and sharp, highlighting the precise geometry of the electronic components in a futuristic laboratory setting. The overall mood is high-tech, technical, and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkChZOBCqzsJipoO0j4dHDl16T6hzbfYyR9FlE7RlIQRK0neuc218idMPPC8SdqMOOvZNC9VdOPuImCpCEXg80ncu_VghKs_9RLteC5UgF7mc4ld5vRs-096VdpY0Eb0TMHQsCI-YQKjsI4P38-o2DEfqmwVM0fqtCPha1jlglf-5g6ji0I48rmxtaaAyYurlmnMaSmUs3t9tq_NC_6VDQg7hPGA83C6uj2pgshS2wSAcXBFajy97D2tgyS002Ba2_5KbPHDTk8Tsc"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-sm text-[13px] font-bold text-on-surface">ATMEGA328P-AU</span>
+<span class="bg-[#39FF14]/20 text-[#39FF14] px-1.5 py-0.5 text-[8px] font-black uppercase tracking-tighter border border-[#39FF14]/30">VALIDATED</span>
+</div>
+<div class="flex justify-between items-end">
+<div class="space-y-0.5">
+<p class="font-label-caps text-[10px] text-zinc-500">STOCK_UNIT: <span class="text-[#39FF14]">242</span></p>
+<p class="font-label-caps text-[10px] text-zinc-500">PKG: TQFP-32</p>
+</div>
+<span class="material-symbols-outlined text-zinc-600 group-hover:text-[#39FF14] transition-colors">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="relative group">
+<div class="bg-zinc-950/80 border border-zinc-800 p-3 rounded-sm flex items-center gap-4 hover:border-[#39FF14]/50 transition-all active:scale-[0.98]">
+<div class="w-14 h-14 bg-zinc-900 border border-zinc-800 flex items-center justify-center p-1 overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A macro shot of a complex array of surface mount resistors and capacitors on a dark green high-density PCB. Glowing neon green electrical paths connect the components, creating a visual metaphor for a neural network or a high-speed data architecture. The lighting is moody with dark shadows and vibrant emissive green highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH2CUdm2jasl-YvUuOETI0l7T0CH5bjHY0txij2z0OEkI3eBhZFAlij1K8YwLGDqxsHppVkmujk4gJYSvsgXM5eWeAMPrVga9S0Y-reyCbk46G14DQzpBurhKbrle28wsLxCjt8k09kW4RvGxWqHLz8E-eGdcC4mVqYbfM_GAPHEObrQe3DKv9av1G09SeBVBjxUFwI3zGyZUEJDlMWFW4JEf2VbgJPdjHVlByuGhfSqKbDVRn3AsD1m-aUFeay_EgAogGBpsF9bvx"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-sm text-[13px] font-bold text-on-surface">ESP32-WROOM-32E</span>
+<span class="bg-[#39FF14]/20 text-[#39FF14] px-1.5 py-0.5 text-[8px] font-black uppercase tracking-tighter border border-[#39FF14]/30">VALIDATED</span>
+</div>
+<div class="flex justify-between items-end">
+<div class="space-y-0.5">
+<p class="font-label-caps text-[10px] text-zinc-500">STOCK_UNIT: <span class="text-[#39FF14]">86</span></p>
+<p class="font-label-caps text-[10px] text-zinc-500">PKG: SMD-38</p>
+</div>
+<span class="material-symbols-outlined text-zinc-600 group-hover:text-[#39FF14] transition-colors">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="relative group">
+<div class="bg-zinc-950/80 border border-zinc-800 p-3 rounded-sm flex items-center gap-4 hover:border-[#39FF14]/50 transition-all active:scale-[0.98]">
+<div class="w-14 h-14 bg-zinc-900 border border-zinc-800 flex items-center justify-center p-1 overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A detailed view of a precision sensor module resting on a dark, technical surface. The sensor features intricate golden circuitry and a small lens, illuminated by a futuristic neon green light source from the side. The scene is sharp, clear, and focused on the technological sophistication of the component." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-9t_M8waYB3ytiI1WWQ9oQ_TRf3gO3wxGeb5wKqmLwAVrKbAe3rd09JrOpah86YoyAr4b97mAqXEomC0Fuw5zq3QvIWROFW71cXXOKs2v-GTKXrz4MuBN3mU40QGdZBkGg6lN1vCdKMmH_GWm8u2HN2KAV1zh8nOgcDlA-biNzh1fvKkA7bULoDVc8h6nSawzLgN7uhe20NNGtZSS14iNH16vmDkJGMbl2UlgAHtk1hcdWplqGFvZUAsvJAnJ5Y9Qj08s2gb73b5D"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-sm text-[13px] font-bold text-on-surface">MPU-6050_CORE</span>
+<span class="bg-zinc-800 text-zinc-500 px-1.5 py-0.5 text-[8px] font-black uppercase tracking-tighter border border-zinc-700">IN_TRANSIT</span>
+</div>
+<div class="flex justify-between items-end">
+<div class="space-y-0.5">
+<p class="font-label-caps text-[10px] text-zinc-500">STOCK_UNIT: <span class="text-error">0</span></p>
+<p class="font-label-caps text-[10px] text-zinc-500">PKG: QFN-24</p>
+</div>
+<span class="material-symbols-outlined text-zinc-600 group-hover:text-[#39FF14] transition-colors">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="relative group">
+<div class="bg-zinc-950/80 border border-zinc-800 p-3 rounded-sm flex items-center gap-4 hover:border-[#39FF14]/50 transition-all active:scale-[0.98]">
+<div class="w-14 h-14 bg-zinc-900 border border-zinc-800 flex items-center justify-center p-1 overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="An abstract visualization of digital data flowing through fiber optic cables, styled with neon green and dark charcoal tones. The image represents high-speed connectivity and data transfer within a laboratory server environment. The light trails create a sense of motion and advanced technological power." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-HelQwCEdqmjfufap91mpKuTN-Bbc-iGtVSfj4M9o-SimURJsjwD-qD48O-YJclK2amPFczV3JB6oH9mQppCFnpLtG5oxetkFLNnWqVOobltd8d-Uplpp2ieSV2NFoL2lcJ-Vj5Ap4Wg8YH-kWT6ZQ9bQMUJkwS6mMDhMd6PF0HE3J23Sb9GfV3JzeLtf7_OKxbPi_s6FR1AjnJlKoqudjIhF0oZg03jLX6g9hp9nyAEcrQ_QEF9mwhkcKonnVWrvQFgw2rCFBerS"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-sm text-[13px] font-bold text-on-surface">LM317_V-REG</span>
+<span class="bg-[#39FF14]/20 text-[#39FF14] px-1.5 py-0.5 text-[8px] font-black uppercase tracking-tighter border border-[#39FF14]/30">VALIDATED</span>
+</div>
+<div class="flex justify-between items-end">
+<div class="space-y-0.5">
+<p class="font-label-caps text-[10px] text-zinc-500">STOCK_UNIT: <span class="text-[#39FF14]">1,402</span></p>
+<p class="font-label-caps text-[10px] text-zinc-500">PKG: TO-220</p>
+</div>
+<span class="material-symbols-outlined text-zinc-600 group-hover:text-[#39FF14] transition-colors">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+<div class="circuit-line w-[1px] h-8 -bottom-8 left-10"></div>
+<div class="circuit-line w-4 h-[1px] -bottom-8 left-10"></div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-20 right-6 w-14 h-14 bg-[#39FF14] text-black rounded-sm shadow-[0_0_20px_rgba(57,255,20,0.4)] flex items-center justify-center z-40 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl font-bold">add</span>
+</button>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-16 bg-zinc-950 border-t border-[#2A2A2A] px-6 pb-safe">
+<div class="flex flex-col items-center justify-center text-zinc-600 pt-2 pb-1 hover:bg-zinc-900 transition-colors active:brightness-125">
+<span class="material-symbols-outlined">terminal</span>
+<span class="font-label-caps text-[10px] font-black uppercase tracking-tight mt-1">COMMAND</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-600 pt-2 pb-1 hover:bg-zinc-900 transition-colors active:brightness-125">
+<span class="material-symbols-outlined">search_check</span>
+<span class="font-label-caps text-[10px] font-black uppercase tracking-tight mt-1">FINDER</span>
+</div>
+<div class="flex flex-col items-center justify-center text-zinc-600 pt-2 pb-1 hover:bg-zinc-900 transition-colors active:brightness-125">
+<span class="material-symbols-outlined">dataset</span>
+<span class="font-label-caps text-[10px] font-black uppercase tracking-tight mt-1">TERMINAL</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#39FF14] border-t-2 border-[#39FF14] bg-[#39FF14]/5 pt-2 pb-1 active:brightness-125">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">science</span>
+<span class="font-label-caps text-[10px] font-black uppercase tracking-tight mt-1">LAB</span>
+</div>
+</nav>
+</body></html>

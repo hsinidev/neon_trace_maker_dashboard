@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MIDNIGHT LABORATORY | ESP32-D0WDQ6-V3</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#222d1e",
+                    "inverse-on-surface": "#293324",
+                    "on-primary": "#053900",
+                    "surface-tint": "#2ae500",
+                    "surface-dim": "#0c1609",
+                    "error-container": "#93000a",
+                    "on-tertiary-container": "#7a5955",
+                    "on-secondary-container": "#00686f",
+                    "tertiary-container": "#ffd3ce",
+                    "tertiary": "#fff8f7",
+                    "primary-fixed": "#79ff5b",
+                    "secondary": "#d3fbff",
+                    "surface-container-lowest": "#071105",
+                    "on-surface-variant": "#baccb0",
+                    "on-tertiary-fixed": "#2c1513",
+                    "surface-container-highest": "#2d3828",
+                    "background": "#0c1609",
+                    "outline": "#85967c",
+                    "inverse-surface": "#dae6d0",
+                    "outline-variant": "#3c4b35",
+                    "surface": "#0c1609",
+                    "error": "#ffb4ab",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "primary-container": "#39ff14",
+                    "secondary-fixed-dim": "#00dbe9",
+                    "on-error": "#690005",
+                    "surface-variant": "#2d3828",
+                    "secondary-container": "#00eefc",
+                    "tertiary-fixed-dim": "#e7bdb8",
+                    "on-tertiary": "#442927",
+                    "surface-container-low": "#141e11",
+                    "on-surface": "#dae6d0",
+                    "on-primary-container": "#107100",
+                    "tertiary-fixed": "#ffdad6",
+                    "surface-container": "#182214",
+                    "primary": "#efffe3",
+                    "on-error-container": "#ffdad6",
+                    "on-background": "#dae6d0",
+                    "on-tertiary-fixed-variant": "#5d3f3c",
+                    "on-primary-fixed-variant": "#095300",
+                    "surface-bright": "#323c2d",
+                    "on-secondary": "#00363a",
+                    "on-secondary-fixed": "#002022",
+                    "inverse-primary": "#106e00",
+                    "primary-fixed-dim": "#2ae500",
+                    "secondary-fixed": "#7df4ff",
+                    "on-primary-fixed": "#022100"
+            },
+            "fontFamily": {
+                    "label-caps": ["Space Grotesk"],
+                    "h3": ["Space Grotesk"],
+                    "h1": ["Space Grotesk"],
+                    "body-md": ["Inter"],
+                    "code-sm": ["Space Grotesk"],
+                    "body-lg": ["Inter"],
+                    "h2": ["Space Grotesk"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .circuit-bg {
+            background-image: radial-gradient(#39FF14 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+        }
+        .circuit-trace-h {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.3), transparent);
+        }
+        .circuit-trace-v {
+            width: 1px;
+            background: linear-gradient(180deg, transparent, rgba(57, 255, 20, 0.3), transparent);
+        }
+        .solder-pad {
+            width: 4px;
+            height: 4px;
+            background-color: #39FF14;
+            box-shadow: 0 0 8px #39FF14;
+        }
+        .glass-panel {
+            background: rgba(12, 22, 9, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(57, 255, 20, 0.1);
+        }
+        .glow-border:hover {
+            border-color: #39FF14;
+            box-shadow: 0 0 12px rgba(57, 255, 20, 0.3);
+        }
+        .terminal-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .terminal-scroll::-webkit-scrollbar-thumb {
+            background: #39FF14;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container overflow-hidden h-screen flex">
+<!-- Digital Grid Canvas -->
+<div class="fixed inset-0 circuit-bg pointer-events-none"></div>
+<!-- SideNavBar (Shared Component Logic) -->
+<aside class="fixed left-0 top-0 h-full w-72 border-r border-outline-variant bg-zinc-950 flex flex-col py-8 z-50">
+<div class="px-6 mb-10">
+<h1 class="text-xl font-bold text-[#39FF14] tracking-widest font-h1">MIDNIGHT LAB</h1>
+<p class="font-label-caps text-[10px] text-primary-fixed-dim mt-1 opacity-70">SYS_READY_V2.04</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-zinc-600 px-8 py-3 flex items-center gap-3 font-label-caps hover:bg-[#39FF14]/5 hover:text-[#39FF14] transition-all group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard_customize">dashboard_customize</span>
+<span>Command Center</span>
+</a>
+<a class="bg-[#39FF14]/10 text-[#39FF14] border-r-4 border-[#39FF14] px-8 py-3 flex items-center gap-3 font-label-caps shadow-[0_0_12px_rgba(57,255,20,0.2)]" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="manage_search">manage_search</span>
+<span>Component Finder</span>
+</a>
+<a class="text-zinc-600 px-8 py-3 flex items-center gap-3 font-label-caps hover:bg-[#39FF14]/5 hover:text-[#39FF14] transition-all group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="inventory_2">inventory_2</span>
+<span>Component Library</span>
+</a>
+<a class="text-zinc-600 px-8 py-3 flex items-center gap-3 font-label-caps hover:bg-[#39FF14]/5 hover:text-[#39FF14] transition-all group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="terminal">terminal</span>
+<span>Developer Terminal</span>
+</a>
+<a class="text-zinc-600 px-8 py-3 flex items-center gap-3 font-label-caps hover:bg-[#39FF14]/5 hover:text-[#39FF14] transition-all group" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings_input_component">settings_input_component</span>
+<span>Schematic Lab</span>
+</a>
+</nav>
+<div class="mt-auto px-6 space-y-2">
+<div class="flex items-center gap-4 p-3 bg-surface-container-low border border-outline-variant rounded">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center border border-primary-container/40">
+<span class="material-symbols-outlined text-primary-container text-sm" data-icon="memory">memory</span>
+</div>
+<div>
+<p class="font-label-caps text-[11px] text-on-surface">CORE_AVATAR</p>
+<div class="flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></div>
+<span class="text-[9px] text-primary-container font-mono uppercase">Online</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Viewport -->
+<main class="ml-72 flex-1 flex flex-col relative overflow-hidden">
+<!-- TopAppBar (Shared Component Logic) -->
+<header class="flex justify-between items-center w-full px-8 h-16 bg-zinc-950/80 backdrop-blur-xl border-b border-[#39FF14]/20 z-40">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#39FF14]" data-icon="arrow_back">arrow_back</span>
+<span class="font-label-caps text-xs tracking-widest text-[#39FF14]">COMP_DETAIL_VIEW // 0xAF32</span>
+</div>
+<div class="flex items-center gap-8">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#39FF14] text-sm" data-icon="memory">memory</span>
+<span class="material-symbols-outlined text-zinc-500 text-sm" data-icon="wifi">wifi</span>
+<span class="material-symbols-outlined text-[#39FF14] text-sm" data-icon="battery_charging_full">battery_charging_full</span>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-zinc-400">SESSION_TIME</p>
+<p class="font-code-sm text-primary-container text-xs">02:44:12:09</p>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Area: Split View -->
+<div class="flex-1 flex overflow-hidden p-6 gap-6 relative">
+<!-- Circuit Trace Decorations -->
+<div class="absolute top-0 left-12 w-px h-full circuit-trace-v opacity-20"></div>
+<div class="absolute top-24 left-0 w-full h-px circuit-trace-h opacity-20"></div>
+<!-- Left Column: Technical Assets -->
+<div class="flex-1 flex flex-col gap-6 overflow-y-auto pr-2 custom-scrollbar">
+<!-- Component Header -->
+<div class="glass-panel p-6 border-l-4 border-l-primary-container relative">
+<div class="absolute top-2 right-4 font-code-sm text-[10px] text-outline opacity-50 uppercase tracking-tighter">SERIAL: 8842-ESP32-V3-LAB</div>
+<div class="flex items-start justify-between">
+<div>
+<h2 class="font-h1 text-primary-container leading-none tracking-tight">ESP32-D0WDQ6-V3</h2>
+<p class="font-label-caps text-on-surface-variant mt-2 text-xs flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                                SYSTEM_READY // INTEGRITY_CHECK: PASS
+                            </p>
+</div>
+</div>
+</div>
+<!-- 3D/Physical Reference & Schematic Grid -->
+<div class="grid grid-cols-2 gap-6 h-[400px]">
+<div class="glass-panel relative flex flex-col group overflow-hidden">
+<div class="absolute top-0 left-0 p-3 bg-surface-container-highest/50 border-br border-outline-variant z-10">
+<p class="font-label-caps text-[10px] text-on-surface">PHYSICAL_REF_01</p>
+</div>
+<img class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-700" data-alt="A detailed macro photograph of an ESP32 microprocessor chip resting on a black industrial surface. The lighting is dramatic and technical, with a sharp neon green rim light that accentuates the metallic pins and the etched text on the silicon package. The surrounding environment is dark and atmospheric, suggesting a high-tech electronics laboratory at midnight. Minimalist circuit trace patterns are faintly visible in the background shadow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCehC38OByOfLwjXpcE6WoVy6KezgLKLps2fz163uPZMWIkyIXNbW_5GTkvtDAyR8MzPo8TedFPmAl1rhVM4vQl_Cgs4T60O41s7umjM3tjs2_APlF5OZshBFQCfZAPmyXO7I1H6i3JV-P2loFWmoDszfGXrM8pcJFysW4e3FNFy5prQpuK79TZq_OyTjO7QXvhzfPnw269NQj3NVUfdOPaCBS1yqJGpmbfjn11uUJxtFDhoyNTA6eBZZ_TK_RokfxyaLxWPji5GtzV"/>
+<div class="absolute inset-0 bg-gradient-to-t from-zinc-950/80 to-transparent"></div>
+</div>
+<div class="glass-panel relative p-4 flex items-center justify-center overflow-hidden">
+<div class="absolute top-0 left-0 p-3 bg-surface-container-highest/50 border-br border-outline-variant z-10">
+<p class="font-label-caps text-[10px] text-on-surface">PINOUT_SCHEMATIC</p>
+</div>
+<div class="w-full h-full border border-dashed border-primary-container/20 flex flex-col items-center justify-center gap-4">
+<!-- Visual placeholder for Schematic -->
+<div class="relative w-48 h-48 border-2 border-primary-container/40 flex items-center justify-center">
+<div class="absolute -left-8 top-1/2 w-8 h-[2px] bg-primary-container/40"></div>
+<div class="absolute -right-8 top-1/2 w-8 h-[2px] bg-primary-container/40"></div>
+<div class="absolute -top-8 left-1/2 w-[2px] h-8 bg-primary-container/40"></div>
+<div class="absolute -bottom-8 left-1/2 w-[2px] h-8 bg-primary-container/40"></div>
+<span class="font-code-sm text-primary-container text-xs animate-pulse uppercase">Scanning PINMAP...</span>
+</div>
+<div class="flex gap-4">
+<span class="font-label-caps text-[10px] text-primary-container/60">GND_0x00</span>
+<span class="font-label-caps text-[10px] text-primary-container/60">VCC_3V3</span>
+<span class="font-label-caps text-[10px] text-primary-container/60">EN_PIN</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Specs Table -->
+<div class="glass-panel overflow-hidden">
+<div class="bg-surface-container-highest/50 px-6 py-3 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-label-caps text-xs text-on-surface">DATA_SPECIFICATION_MATRIX</h3>
+<span class="material-symbols-outlined text-primary-container text-sm" data-icon="terminal">terminal</span>
+</div>
+<div class="p-0">
+<table class="w-full text-left font-code-sm text-xs border-collapse">
+<tbody>
+<tr class="border-b border-outline-variant/30 hover:bg-primary-container/5 transition-colors group">
+<td class="py-4 px-6 text-zinc-500 uppercase tracking-tighter w-1/3">Architecture</td>
+<td class="py-4 px-6 text-[#39FF14] font-medium">XTENSA® DUAL-CORE 32-BIT LX6</td>
+</tr>
+<tr class="border-b border-outline-variant/30 hover:bg-primary-container/5 transition-colors group">
+<td class="py-4 px-6 text-zinc-500 uppercase tracking-tighter">Clock Frequency</td>
+<td class="py-4 px-6 text-[#39FF14] font-medium">UP TO 240 MHZ</td>
+</tr>
+<tr class="border-b border-outline-variant/30 hover:bg-primary-container/5 transition-colors group">
+<td class="py-4 px-6 text-zinc-500 uppercase tracking-tighter">Internal SRAM</td>
+<td class="py-4 px-6 text-[#39FF14] font-medium">520 KB</td>
+</tr>
+<tr class="border-b border-outline-variant/30 hover:bg-primary-container/5 transition-colors group">
+<td class="py-4 px-6 text-zinc-500 uppercase tracking-tighter">Wireless Proto</td>
+<td class="py-4 px-6 text-[#39FF14] font-medium">WI-FI 802.11 B/G/N + BLUETOOTH V4.2</td>
+</tr>
+<tr class="hover:bg-primary-container/5 transition-colors group">
+<td class="py-4 px-6 text-zinc-500 uppercase tracking-tighter">I/O Peripherals</td>
+<td class="py-4 px-6 text-[#39FF14] font-medium">CAPACITIVE TOUCH, ADC, DAC, I2C, UART, SPI</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column: Sidebar -->
+<div class="w-96 flex flex-col gap-6">
+<!-- Performance Sidebar -->
+<div class="glass-panel flex-1 flex flex-col overflow-hidden">
+<div class="p-4 border-b border-outline-variant bg-surface-container-highest/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-lg" data-icon="monitoring">monitoring</span>
+<h3 class="font-label-caps text-xs">REAL_TIME_TELEMETRY</h3>
+</div>
+<div class="p-4 space-y-6 flex-1">
+<!-- Thermal Graph Placeholder -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<p class="font-label-caps text-[10px] text-zinc-400">THERMAL_LOAD (C°)</p>
+<p class="font-code-sm text-primary-container text-sm">34.2°</p>
+</div>
+<div class="h-20 w-full relative flex items-end gap-1">
+<div class="bg-primary-container/20 w-full h-[60%] border-t border-primary-container/60"></div>
+<div class="bg-primary-container/20 w-full h-[65%] border-t border-primary-container/60"></div>
+<div class="bg-primary-container/20 w-full h-[58%] border-t border-primary-container/60"></div>
+<div class="bg-primary-container/20 w-full h-[70%] border-t border-primary-container/60"></div>
+<div class="bg-primary-container/20 w-full h-[62%] border-t border-primary-container/60"></div>
+<div class="bg-primary-container/20 w-full h-[65%] border-t border-primary-container/60"></div>
+<div class="bg-primary-container/40 w-full h-[75%] border-t-2 border-primary-container"></div>
+</div>
+</div>
+<!-- Power Consumption Placeholder -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<p class="font-label-caps text-[10px] text-zinc-400">POWER_DRAW (mA)</p>
+<p class="font-code-sm text-[#00dbe9] text-sm">118.5</p>
+</div>
+<div class="h-1 bg-surface-container-low w-full relative">
+<div class="absolute h-full bg-[#00dbe9] w-[45%] shadow-[0_0_8px_#00dbe9]"></div>
+</div>
+</div>
+<!-- Terminal Logs -->
+<div class="flex-1 border-t border-outline-variant pt-4 mt-4 overflow-hidden flex flex-col">
+<p class="font-label-caps text-[10px] text-zinc-500 mb-3 uppercase">System_Activity_Log</p>
+<div class="terminal-scroll flex-1 overflow-y-auto space-y-2 font-code-sm text-[11px] leading-tight">
+<div class="flex gap-2 text-zinc-500">
+<span>[14:02:11]</span>
+<span class="text-primary-container">INITIALIZING CORE_BOOT_SEQUENCE...</span>
+</div>
+<div class="flex gap-2 text-zinc-500">
+<span>[14:02:12]</span>
+<span>ENABLING WI-FI STACK: OK</span>
+</div>
+<div class="flex gap-2 text-zinc-500">
+<span>[14:02:15]</span>
+<span>ALLOCATING 520KB SRAM...</span>
+</div>
+<div class="flex gap-2 text-zinc-500">
+<span>[14:02:16]</span>
+<span class="text-primary-container">READY FOR FLASH_COMMAND</span>
+</div>
+<div class="flex gap-2 text-zinc-500">
+<span>[14:02:44]</span>
+<span class="text-[#00dbe9]">TELEMETRY_STREAM_STARTED</span>
+</div>
+<div class="flex gap-2 text-zinc-500">
+<span>[14:03:01]</span>
+<span class="animate-pulse">_</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Panel -->
+<div class="space-y-3">
+<button class="w-full h-14 bg-[#39FF14] text-on-primary-container font-label-caps text-xs flex items-center justify-between px-6 hover:brightness-110 active:scale-[0.98] transition-all">
+<span>DOWNLOAD_DATASHEET_PDF</span>
+<span class="material-symbols-outlined text-lg" data-icon="picture_as_pdf">picture_as_pdf</span>
+</button>
+<button class="w-full h-14 border border-[#39FF14]/40 bg-transparent text-[#39FF14] font-label-caps text-xs flex items-center justify-between px-6 hover:bg-[#39FF14]/5 active:scale-[0.98] transition-all group">
+<span class="group-hover:drop-shadow-[0_0_5px_rgba(57,255,20,0.5)]">ADD_TO_BOM_MANIFEST</span>
+<span class="material-symbols-outlined text-lg" data-icon="add_shopping_cart">add_shopping_cart</span>
+</button>
+<button class="w-full h-14 border border-outline text-on-surface-variant font-label-caps text-xs flex items-center justify-between px-6 hover:border-[#00dbe9] hover:text-[#00dbe9] transition-all">
+<span>REQUEST_RESTOCK</span>
+<span class="material-symbols-outlined text-lg" data-icon="inventory">inventory</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer / System Breadcrumb -->
+<footer class="h-10 bg-zinc-950 px-8 flex items-center justify-between border-t border-[#39FF14]/10">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="solder-pad"></div>
+<span class="font-code-sm text-[10px] text-zinc-500">LOC: LAB_STORAGE_A_BIN_12</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="solder-pad bg-[#00dbe9] shadow-[#00dbe9]"></div>
+<span class="font-code-sm text-[10px] text-zinc-500">STOCK_LEVEL: 42_UNIT</span>
+</div>
+</div>
+<div class="font-code-sm text-[10px] text-primary-container uppercase tracking-widest">
+                Component_Integrity_Verified_MD5_v3.0.4
+            </div>
+</footer>
+</main>
+<!-- FAB Override (Suppressed for Details Screen per Mandate) -->
+</body></html>

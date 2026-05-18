@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0c1609;
+            background-image: radial-gradient(#1a2e12 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .circuit-line {
+            position: absolute;
+            background-color: #39FF14;
+            opacity: 0.3;
+        }
+        .solder-pad {
+            width: 4px;
+            height: 4px;
+            background-color: #39FF14;
+            position: absolute;
+        }
+        .glass-hud {
+            background: rgba(18, 22, 20, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #2A2A2A;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary": "#00363a",
+                      "on-tertiary-container": "#7a5955",
+                      "surface-tint": "#2ae500",
+                      "primary-container": "#39ff14",
+                      "secondary-fixed": "#7df4ff",
+                      "tertiary-fixed-dim": "#e7bdb8",
+                      "tertiary-container": "#ffd3ce",
+                      "on-tertiary-fixed": "#2c1513",
+                      "on-secondary-fixed-variant": "#004f54",
+                      "secondary-container": "#00eefc",
+                      "on-surface-variant": "#baccb0",
+                      "surface-container": "#182214",
+                      "surface-bright": "#323c2d",
+                      "inverse-surface": "#dae6d0",
+                      "secondary-fixed-dim": "#00dbe9",
+                      "on-surface": "#dae6d0",
+                      "secondary": "#d3fbff",
+                      "primary": "#efffe3",
+                      "on-tertiary": "#442927",
+                      "error": "#ffb4ab",
+                      "primary-fixed-dim": "#2ae500",
+                      "error-container": "#93000a",
+                      "on-primary-fixed-variant": "#095300",
+                      "surface": "#0c1609",
+                      "on-error-container": "#ffdad6",
+                      "background": "#0c1609",
+                      "on-secondary-fixed": "#002022",
+                      "surface-variant": "#2d3828",
+                      "surface-container-low": "#141e11",
+                      "outline": "#85967c",
+                      "tertiary": "#fff8f7",
+                      "on-primary-fixed": "#022100",
+                      "inverse-primary": "#106e00",
+                      "inverse-on-surface": "#293324",
+                      "outline-variant": "#3c4b35",
+                      "on-background": "#dae6d0",
+                      "on-tertiary-fixed-variant": "#5d3f3c",
+                      "primary-fixed": "#79ff5b",
+                      "tertiary-fixed": "#ffdad6",
+                      "on-primary": "#053900",
+                      "surface-container-high": "#222d1e",
+                      "surface-dim": "#0c1609",
+                      "surface-container-lowest": "#071105",
+                      "on-error": "#690005",
+                      "on-secondary-container": "#00686f",
+                      "surface-container-highest": "#2d3828",
+                      "on-primary-container": "#107100"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "grid-gutter": "20px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "unit": "4px",
+                      "sm": "8px",
+                      "container-max": "1440px",
+                      "xl": "40px"
+              },
+              "fontFamily": {
+                      "h2": ["Space Grotesk"],
+                      "code-sm": ["Space Grotesk"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-caps": ["Space Grotesk"],
+                      "h3": ["Space Grotesk"],
+                      "h1": ["Space Grotesk"]
+              },
+              "fontSize": {
+                      "h2": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "code-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                      "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "500"}],
+                      "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface min-h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-[#0A0A0A]/90 backdrop-blur-md border-b border-[#2A2A2A]">
+<div class="flex items-center gap-3">
+<button class="text-[#39FF14] active:opacity-80 active:scale-95 transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-lg font-bold text-[#39FF14] drop-shadow-[0_0_8px_rgba(57,255,20,0.6)] font-['Space_Grotesk'] tracking-tighter uppercase">SCHEMATIC_LAB_V1.0</h1>
+</div>
+<div class="w-8 h-8 rounded-full border border-[#39FF14]/50 overflow-hidden bg-surface-container-highest">
+<img alt="Technician Profile" data-alt="A highly detailed close-up of a digital avatar for a technical operator in a futuristic interface. The profile picture features a stylized, cybernetic human silhouette with glowing cyan ocular implants. The background is a dense matrix of neon green data streams and circuit traces, consistent with a high-tech Midnight Laboratory aesthetic. The overall mood is cold, professional, and advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCff7sp9yHAZEx6rIdHECphquLUxhHcnLoNH97Aucprlsb-OypjAoXhF2pEq42UI5e1mRmjtX0iRilRpu3gvFJ1hgfyvgVWRAmoMgwaZI9_SyQQ79MdVZ8EjpmaLunipqbdNviKWTrrOplVOkXW8QauKxrd6fucfVxllDqqgwEOnSoZ7Z0PwAmRphUFsVYTto5D7OsBMjrluDvLHzD_XC-DAVb3_g_P-uC2eE8ztF2Bi-0EdSuWT-7pXFkN2Wa5tkhvfugG67y8fXnV"/>
+</div>
+</header>
+<!-- Main Content: Interactive Schematic Viewer -->
+<main class="flex-1 mt-16 mb-20 relative overflow-hidden bg-background">
+<!-- Interactive Blueprint Area -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-auto">
+<!-- Simulated Schematic Content -->
+<div class="relative w-[150%] h-[150%] flex items-center justify-center">
+<!-- Circuit Trace Decorations -->
+<div class="circuit-line w-full h-[1px] top-1/4 left-0"></div>
+<div class="circuit-line w-full h-[1px] top-1/2 left-0"></div>
+<div class="circuit-line h-full w-[1px] left-1/3 top-0"></div>
+<div class="solder-pad left-1/3 top-1/4"></div>
+<div class="solder-pad left-1/3 top-1/2"></div>
+<div class="p-8 border-2 border-[#39FF14]/40 bg-surface-container/50 backdrop-blur-sm rounded-lg relative">
+<div class="absolute -top-3 -left-3 text-[10px] font-code-sm text-[#39FF14] bg-background px-1">REF: MAIN_LOGIC_ARRAY</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="p-4 border border-[#39FF14]/30 rounded flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-[#39FF14] mb-2">memory</span>
+<span class="font-code-sm text-xs text-on-surface-variant uppercase">IC_74HC595</span>
+</div>
+<div class="p-4 border border-[#39FF14]/30 rounded flex flex-col items-center">
+<span class="material-symbols-outlined text-4xl text-[#39FF14] mb-2">settings_input_component</span>
+<span class="font-code-sm text-xs text-on-surface-variant uppercase">ESP32_WROOM</span>
+</div>
+</div>
+<!-- Connection Traces -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="filter: drop-shadow(0 0 2px #39FF14);">
+<path d="M 50 100 L 150 100" fill="none" stroke="#39FF14" stroke-width="1"></path>
+<path d="M 200 100 L 250 100" fill="none" stroke="#39FF14" stroke-dasharray="4" stroke-width="1"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- HUD Controls -->
+<div class="absolute top-4 right-4 flex flex-col gap-2">
+<button class="w-10 h-10 glass-hud flex items-center justify-center text-[#39FF14] rounded-md border-[#39FF14]/20">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="w-10 h-10 glass-hud flex items-center justify-center text-[#39FF14] rounded-md border-[#39FF14]/20">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="w-10 h-10 glass-hud flex items-center justify-center text-[#39FF14] rounded-md border-[#39FF14]/20">
+<span class="material-symbols-outlined">center_focus_strong</span>
+</button>
+</div>
+<!-- Slide-up Panel: Connected Nodes -->
+<section class="absolute bottom-0 left-0 right-0 glass-hud border-t border-[#39FF14]/30 rounded-t-xl z-20 translate-y-[60%] hover:translate-y-0 transition-transform duration-500 ease-in-out pb-4">
+<div class="w-12 h-1 bg-[#2A2A2A] rounded-full mx-auto my-3"></div>
+<div class="px-6 py-2 border-b border-[#2A2A2A] flex justify-between items-center mb-4">
+<h2 class="font-h3 text-base text-[#39FF14] tracking-widest uppercase">CONNECTED_NODES</h2>
+<span class="px-2 py-0.5 bg-[#39FF14]/10 text-[#39FF14] text-[10px] font-bold border border-[#39FF14]/30 rounded-sm">ACTIVE: 02</span>
+</div>
+<div class="px-6 space-y-4 max-h-[300px] overflow-y-auto">
+<!-- Node 1 -->
+<div class="p-4 border border-[#2A2A2A] bg-[#0c1609] relative group hover:border-[#39FF14]/50 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-code-sm text-[#39FF14] text-sm">IC_74HC595</p>
+<p class="text-[10px] text-on-surface-variant font-code-sm">SERIAL_NO: 8-BIT SHIFT REG</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-[#39FF14] animate-pulse"></div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-3">
+<div class="text-[10px]">
+<p class="text-on-surface-variant mb-1 uppercase">Voltage</p>
+<p class="font-code-sm text-on-surface">5.0V_DC</p>
+</div>
+<div class="text-[10px]">
+<p class="text-on-surface-variant mb-1 uppercase">Signal_Freq</p>
+<p class="font-code-sm text-on-surface">100_MHZ</p>
+</div>
+</div>
+</div>
+<!-- Node 2 -->
+<div class="p-4 border border-[#2A2A2A] bg-[#0c1609] relative group hover:border-[#39FF14]/50 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-code-sm text-[#39FF14] text-sm">ESP32_WROOM</p>
+<p class="text-[10px] text-on-surface-variant font-code-sm">MCU_CORE: DUAL-CORE 32BIT</p>
+</div>
+<div class="w-2 h-2 rounded-full bg-[#39FF14] animate-pulse"></div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-3">
+<div class="text-[10px]">
+<p class="text-on-surface-variant mb-1 uppercase">Temp_Core</p>
+<p class="font-code-sm text-on-surface">42.5°C</p>
+</div>
+<div class="text-[10px]">
+<p class="text-on-surface-variant mb-1 uppercase">Wifi_Status</p>
+<p class="font-code-sm text-on-surface text-secondary-fixed">CONNECTED</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center bg-[#0A0A0A] pb-safe h-16 border-t border-[#2A2A2A] shadow-[0_-4px_10px_rgba(0,0,0,0.5)]">
+<button class="flex flex-col items-center justify-center text-[#39FF14] border-t-2 border-[#39FF14] pt-2 pb-1 drop-shadow-[0_0_5px_rgba(57,255,20,0.4)] active:scale-90 duration-150">
+<span class="material-symbols-outlined">schema</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold uppercase tracking-widest">VIEWER</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#4A4A4A] pt-2 pb-1 hover:bg-[#121212] active:scale-90 duration-150">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold uppercase tracking-widest">NODES</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#4A4A4A] pt-2 pb-1 hover:bg-[#121212] active:scale-90 duration-150">
+<span class="material-symbols-outlined">handyman</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold uppercase tracking-widest">TOOLS</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#4A4A4A] pt-2 pb-1 hover:bg-[#121212] active:scale-90 duration-150">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Space_Grotesk'] text-[10px] font-bold uppercase tracking-widest">SYSTEM</span>
+</button>
+</nav>
+<!-- FAB Overlay -->
+<button class="fixed right-6 bottom-24 w-14 h-14 bg-[#39FF14] text-black rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(57,255,20,0.4)] active:scale-95 transition-all z-30">
+<span class="material-symbols-outlined font-bold" data-weight="fill">add</span>
+</button>
+</body></html>

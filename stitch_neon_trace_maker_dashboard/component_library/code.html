@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MAKER_OS // COMPONENT_LIBRARY</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .ease-mono { transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); }
+        .circuit-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(57, 255, 20, 0.05) 1px, transparent 0);
+            background-size: 20px 20px;
+        }
+        .circuit-trace-v {
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, #3c4b35, #39ff14, #3c4b35, transparent);
+        }
+        .circuit-trace-h {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #3c4b35, #39ff14, #3c4b35, transparent);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#85967c",
+                        "on-surface": "#dae6d0",
+                        "on-secondary-container": "#00686f",
+                        "inverse-on-surface": "#293324",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#2ae500",
+                        "on-secondary": "#00363a",
+                        "on-tertiary": "#442927",
+                        "on-primary-fixed": "#022100",
+                        "outline-variant": "#3c4b35",
+                        "secondary-container": "#00eefc",
+                        "primary": "#efffe3",
+                        "error": "#ffb4ab",
+                        "on-primary-container": "#107100",
+                        "inverse-primary": "#106e00",
+                        "tertiary-container": "#ffd3ce",
+                        "surface-container-high": "#222d1e",
+                        "surface-container-highest": "#2d3828",
+                        "on-tertiary-fixed-variant": "#5d3f3c",
+                        "on-tertiary-fixed": "#2c1513",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "on-primary-fixed-variant": "#095300",
+                        "primary-container": "#39ff14",
+                        "on-tertiary-container": "#7a5955",
+                        "on-surface-variant": "#baccb0",
+                        "on-primary": "#053900",
+                        "secondary-fixed-dim": "#00dbe9",
+                        "surface-bright": "#323c2d",
+                        "surface-container": "#182214",
+                        "background": "#0c1609",
+                        "tertiary-fixed": "#ffdad6",
+                        "surface-container-lowest": "#071105",
+                        "surface": "#0c1609",
+                        "on-background": "#dae6d0",
+                        "on-secondary-fixed": "#002022",
+                        "inverse-surface": "#dae6d0",
+                        "tertiary": "#fff8f7",
+                        "secondary": "#d3fbff",
+                        "on-error": "#690005",
+                        "surface-dim": "#0c1609",
+                        "secondary-fixed": "#7df4ff",
+                        "primary-fixed": "#79ff5b",
+                        "surface-tint": "#2ae500",
+                        "surface-variant": "#2d3828",
+                        "surface-container-low": "#141e11",
+                        "tertiary-fixed-dim": "#e7bdb8"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h3": ["Space Grotesk"],
+                        "code-sm": ["Space Grotesk"],
+                        "label-caps": ["Space Grotesk"],
+                        "h1": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "h2": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "1.3", "letterSpacing": "0em", "fontWeight": "500"}],
+                        "code-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                        "h1": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "h2": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-zinc-950 text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- TOP APP BAR -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800 shadow-[0_0_15px_rgba(57,255,20,0.1)]">
+<div class="flex items-center space-x-4">
+<span class="text-lime-400 font-black tracking-tighter text-xl">MAKER_OS_v1.0.4</span>
+<div class="h-4 w-[1px] bg-zinc-800 mx-2"></div>
+<span class="font-['Space_Grotesk'] uppercase tracking-widest text-xs text-lime-400 brightness-125">COMPONENT_LIBRARY</span>
+</div>
+<div class="flex items-center space-x-6">
+<div class="relative group hidden md:block">
+<input class="bg-zinc-900/50 border border-zinc-800 text-xs font-['Space_Grotesk'] tracking-wider px-4 py-2 w-64 focus:outline-none focus:border-lime-400 transition-all" placeholder="SEARCH_DATABASE..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 text-sm">search</span>
+</div>
+<div class="flex space-x-4 text-zinc-500">
+<span class="material-symbols-outlined hover:text-lime-400 cursor-pointer transition-all">sensors</span>
+<span class="material-symbols-outlined hover:text-lime-400 cursor-pointer transition-all">memory</span>
+<span class="material-symbols-outlined hover:text-lime-400 cursor-pointer transition-all">settings_input_component</span>
+</div>
+</div>
+</header>
+<!-- SIDE NAVIGATION -->
+<aside class="fixed left-0 top-0 h-full flex flex-col pt-20 pb-8 border-r border-zinc-800 bg-zinc-950 w-64 z-40">
+<div class="px-6 mb-8">
+<div class="flex items-center space-x-3 mb-2">
+<div class="w-10 h-10 rounded bg-zinc-900 border border-lime-400/30 flex items-center justify-center overflow-hidden">
+<img alt="OPERATOR_01" class="w-8 h-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChr_IOGhsPl4Ouu0x1AsB0FrDpgZs2gunTHFRGC2s34A8lnJ_Y2ewX3dTVHcCwbPPsZcqV8wiGHgIuaIWDIHxrnfIKfyYnwJ0KNJxf_ZCemFw15HKke0nn2SDWqm1fG6LdmRaT6bBJfmxyljxWd6PT0syBHgIS7jGoMVScBhgJtoRVHiSDxAN6BM0Df7WCSwLSAVSYrTanjyjPZvNR5gh7__GoqCA-8ikYLeX2DLc2mVo13R07JRpmleXcfe7o_MW9QD-BLfn9v1p8"/>
+</div>
+<div>
+<div class="text-lime-400 font-bold font-['Space_Grotesk'] text-xs">OPERATOR_01</div>
+<div class="text-[10px] text-zinc-500 font-['Space_Grotesk'] tracking-tighter">MK-SYS ONLINE</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto">
+<a class="flex items-center space-x-3 text-zinc-600 py-3 px-4 hover:bg-zinc-900 hover:text-lime-200 transition-colors duration-150 cursor-crosshair" href="#">
+<span class="material-symbols-outlined">dashboard_customize</span>
+<span class="font-['Space_Grotesk'] text-[11px] font-medium tracking-tight uppercase">Command Center</span>
+</a>
+<a class="flex items-center space-x-3 text-lime-400 bg-lime-400/10 border-l-4 border-lime-400 py-3 px-4 shadow-[inset_0_0_10px_rgba(57,255,20,0.1)] transition-colors duration-150 cursor-crosshair" href="#">
+<span class="material-symbols-outlined">memory</span>
+<span class="font-['Space_Grotesk'] text-[11px] font-medium tracking-tight uppercase">Component Finder</span>
+</a>
+<a class="flex items-center space-x-3 text-zinc-600 py-3 px-4 hover:bg-zinc-900 hover:text-lime-200 transition-colors duration-150 cursor-crosshair" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span class="font-['Space_Grotesk'] text-[11px] font-medium tracking-tight uppercase">Developer Terminal</span>
+</a>
+<a class="flex items-center space-x-3 text-zinc-600 py-3 px-4 hover:bg-zinc-900 hover:text-lime-200 transition-colors duration-150 cursor-crosshair" href="#">
+<span class="material-symbols-outlined">schema</span>
+<span class="font-['Space_Grotesk'] text-[11px] font-medium tracking-tight uppercase">Schematic Lab</span>
+</a>
+<div class="mt-8 px-6">
+<div class="text-[10px] text-zinc-700 font-bold tracking-[0.2em] mb-4">CATEGORIES</div>
+<div class="space-y-4">
+<div class="group cursor-pointer">
+<div class="flex items-center justify-between text-[11px] font-['Space_Grotesk'] text-zinc-400 group-hover:text-lime-400">
+<span>INTEGRATED_CIRCUITS</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</div>
+</div>
+<div class="group cursor-pointer">
+<div class="flex items-center justify-between text-[11px] font-['Space_Grotesk'] text-zinc-400 group-hover:text-lime-400">
+<span>PASSIVE_COMPONENTS</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</div>
+</div>
+<div class="group cursor-pointer">
+<div class="flex items-center justify-between text-[11px] font-['Space_Grotesk'] text-zinc-400 group-hover:text-lime-400">
+<span>ELECTROMECHANICAL</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="border-t border-zinc-800 pt-4 px-4 space-y-1">
+<a class="flex items-center space-x-3 text-zinc-600 py-2 px-4 hover:text-lime-400 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">biotech</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase">Diagnostics</span>
+</a>
+<a class="flex items-center space-x-3 text-zinc-600 py-2 px-4 hover:text-lime-400 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">history_edu</span>
+<span class="font-['Space_Grotesk'] text-[10px] uppercase">Logs</span>
+</a>
+</div>
+</aside>
+<!-- MAIN CANVAS -->
+<main class="ml-64 pt-16 min-h-screen circuit-bg">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- HEADER & FILTERS -->
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6 relative">
+<div class="absolute -left-8 top-0 h-full circuit-trace-v opacity-30"></div>
+<div class="space-y-2">
+<div class="flex items-center space-x-2 text-lime-400/50 font-['Space_Grotesk'] text-[10px] tracking-widest">
+<span>LIBRARY_ROOT</span>
+<span class="material-symbols-outlined text-[12px]">navigate_next</span>
+<span>MICROCONTROLLERS</span>
+</div>
+<h1 class="font-h1 text-h2 text-on-surface uppercase tracking-tight">Component_Archive</h1>
+<p class="text-zinc-500 font-['Space_Grotesk'] text-xs max-w-lg">Index of validated electronic components for hardware prototyping and deployment. All assets include verified pinouts and footprint templates.</p>
+</div>
+<div class="flex items-center space-x-4">
+<button class="flex items-center space-x-2 px-4 py-2 bg-zinc-900 border border-zinc-800 text-[10px] font-['Space_Grotesk'] font-bold tracking-widest text-zinc-400 hover:border-lime-400 transition-all">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>FAVORITES</span>
+</button>
+<button class="flex items-center space-x-2 px-4 py-2 bg-zinc-900 border border-zinc-800 text-[10px] font-['Space_Grotesk'] font-bold tracking-widest text-zinc-400 hover:border-lime-400 transition-all">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>IN_STOCK_ONLY</span>
+</button>
+<button class="flex items-center space-x-2 px-6 py-2 bg-zinc-950 border border-lime-400 text-[10px] font-['Space_Grotesk'] font-bold tracking-widest text-lime-400 hover:shadow-[0_0_8px_rgba(57,255,20,0.4)] transition-all group">
+<span>NEW_COMPONENT</span>
+<span class="material-symbols-outlined text-[16px] group-hover:rotate-90 transition-transform">add</span>
+</button>
+</div>
+</div>
+<!-- COMPONENT GRID -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- CARD 1 -->
+<div class="bg-zinc-900/60 backdrop-blur-md border border-zinc-800 p-4 relative group hover:border-lime-400/50 transition-all cursor-pointer">
+<div class="absolute top-0 right-0 p-2 text-[8px] font-['Space_Grotesk'] text-zinc-700 tracking-tighter">ID: IC-328-P</div>
+<div class="h-32 w-full bg-zinc-950 border border-zinc-800 mb-4 overflow-hidden relative group-hover:border-lime-400/20 transition-all">
+<img class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity" data-alt="A macro close-up of a square microchip mounted on a dark, technical circuit board. The surface of the chip features crisp laser-etched serial numbers and logos. Neon green circuit traces pulse subtly in the background, weaving around small surface-mount components. The lighting is low-key and dramatic, highlighting the metallic pins of the chip with a sharp, digital sheen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuJHQM1--jvHVSCHYZzNXekiBhmgSlhlkhFV_gbE73c_Xcj8F66TDKKVzucHg32nube8bzswVXgoMrclqE1HTL_FtbLS6367tGUmPjt9vpBdJeljcGo2p9BCZ0T21fv0WGww1os72mOAklDPLdrGg587Nq0du-tg2UserI7z7tOjzCpsOsvmfLbOM_loyKW40P3idFq15YSdeKaAhcJh2LVRdevTeQSZK_Ak3oscUzNJuo9S5fVkNdr65iExQk1m1MmMV4wcukbVR-"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-lime-400 text-zinc-950 text-[8px] font-bold tracking-widest uppercase">Validated</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-['Space_Grotesk'] font-bold text-sm tracking-tight text-lime-400 group-hover:brightness-125">ATMEGA328P-AU</h3>
+<p class="text-[10px] text-zinc-500 font-['Inter'] leading-relaxed">8-bit AVR Microcontroller, 32KB Flash, 2KB SRAM, 20MHz clock speed. TQFP-32 Package.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-zinc-800/50 flex items-center justify-between">
+<span class="text-[10px] font-['Space_Grotesk'] text-zinc-600">STOCK: 42_UNITS</span>
+<button class="flex items-center space-x-1 text-[9px] font-['Space_Grotesk'] font-black tracking-widest text-lime-400 group-hover:translate-x-1 transition-transform">
+<span>VIEW_IN_FINDER</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- CARD 2 -->
+<div class="bg-zinc-900/60 backdrop-blur-md border border-zinc-800 p-4 relative group hover:border-lime-400/50 transition-all cursor-pointer">
+<div class="absolute top-0 right-0 p-2 text-[8px] font-['Space_Grotesk'] text-zinc-700 tracking-tighter">ID: IC-555-T</div>
+<div class="h-32 w-full bg-zinc-950 border border-zinc-800 mb-4 overflow-hidden relative group-hover:border-lime-400/20 transition-all">
+<img class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity" data-alt="A clean, futuristic technical schematic of an integrated circuit. The diagram is rendered with precise neon cyan and lime green vector lines that describe the internal logic gates and pin connections. Set against a dark, textured charcoal background with a subtle digital grid, the visual evokes a high-tech engineering workstation or a heads-up display from a sci-fi film." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5BvgtBrba7cFty4WKDusM3y3e4o-anhmevVp1TfRFVPKVj-g58yWdOeUtUzcMLj5INuIuRMg-3s0vlKMEQG0jCHuoDK0vzIQA9lXg1GIf4RurNXxEYe6v4SjJs_RxobibRf7e9tL961ckP1C7Ia11da_EVtD5kI0tjQJrgWwOZUbNOePGLw1D-PEus92zk5p_SB2NTKMfQ_8hEdF2rKtPFJMNI1QDNKh0vUxQZmCX7HBhmI-Bapj_O_1KD41z1wG2r3e6Y5HYKfFc"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-zinc-800 text-zinc-300 text-[8px] font-bold tracking-widest uppercase">Legacy</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-['Space_Grotesk'] font-bold text-sm tracking-tight text-lime-400 group-hover:brightness-125">NE555DR</h3>
+<p class="text-[10px] text-zinc-500 font-['Inter'] leading-relaxed">Precision Timer, Monostable and Astable modes, 4.5V to 16V supply. SOIC-8 Package.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-zinc-800/50 flex items-center justify-between">
+<span class="text-[10px] font-['Space_Grotesk'] text-zinc-600">STOCK: 128_UNITS</span>
+<button class="flex items-center space-x-1 text-[9px] font-['Space_Grotesk'] font-black tracking-widest text-lime-400 group-hover:translate-x-1 transition-transform">
+<span>VIEW_IN_FINDER</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- CARD 3 -->
+<div class="bg-zinc-900/60 backdrop-blur-md border border-zinc-800 p-4 relative group hover:border-lime-400/50 transition-all cursor-pointer">
+<div class="absolute top-0 right-0 p-2 text-[8px] font-['Space_Grotesk'] text-zinc-700 tracking-tighter">ID: SN-TMP-01</div>
+<div class="h-32 w-full bg-zinc-950 border border-zinc-800 mb-4 overflow-hidden relative group-hover:border-lime-400/20 transition-all">
+<img class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity" data-alt="A highly detailed macro photograph of a digital sensor module. The small green PCB features gold-plated contact pads and a cluster of tiny surface-mount resistors and capacitors. A single microscopic LED on the board pulses with a brilliant neon green light, casting long shadows across the matte black surface. The composition is focused and technical, emphasizing the precision of modern electronic manufacturing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrNa8V21zbgtEzgqLreB0Vy9RFz1cCDT3a2k2-calY280BYe95jXIkk0KnLPGARred-bRMVHLKPqO2aYu3qh87LD5rSUDuY6QZ4E-yQ1uvKcefGYQwEEfMbi6RYFQcGZVGmSRnVsmur_zZm_WuS3SbuCuHoO_RbqjYPHIb08HZQpWrglMaQMNgWXefKyNCUAEJukbnHDeOJON3Ro8lEgIHHGQTdgkIPcZBBmPBPh8rB9qiQ44VjwwfFBI55wP-vYZgWwiF4Sa4Hkf3"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-lime-400 text-zinc-950 text-[8px] font-bold tracking-widest uppercase">Validated</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-['Space_Grotesk'] font-bold text-sm tracking-tight text-lime-400 group-hover:brightness-125">BMP280_SENSE</h3>
+<p class="text-[10px] text-zinc-500 font-['Inter'] leading-relaxed">Digital Pressure &amp; Temperature Sensor. I2C/SPI interface. Ultra-low power consumption.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-zinc-800/50 flex items-center justify-between">
+<span class="text-[10px] font-['Space_Grotesk'] text-zinc-600">STOCK: 15_UNITS</span>
+<button class="flex items-center space-x-1 text-[9px] font-['Space_Grotesk'] font-black tracking-widest text-lime-400 group-hover:translate-x-1 transition-transform">
+<span>VIEW_IN_FINDER</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- CARD 4 -->
+<div class="bg-zinc-900/60 backdrop-blur-md border border-zinc-800 p-4 relative group hover:border-lime-400/50 transition-all cursor-pointer">
+<div class="absolute top-0 right-0 p-2 text-[8px] font-['Space_Grotesk'] text-zinc-700 tracking-tighter">ID: IC-REG-05</div>
+<div class="h-32 w-full bg-zinc-950 border border-zinc-800 mb-4 overflow-hidden relative group-hover:border-lime-400/20 transition-all">
+<img class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity" data-alt="A focused industrial shot of a voltage regulator component equipped with a black ribbed heat sink. The metal fins of the sink catch the light, revealing a polished texture. It sits on a high-density circuit board where glowing cyan and green lines simulate the flow of electrical power. The surrounding environment is dark and atmospheric, focusing entirely on the structural and functional beauty of the power management hardware." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3Nyyh45jcbPKgvl1LAQ5q1eQ19VDEZriPutlECvlMwr-r39MCr5dZua-Zk91ZZF5x1gAhqIgVqqMt34b-a9hMDNXICHz9AWzeAdkp3_2sPdZjh6imApdksSogMwf5joFu8Gf-W9-1e1-J10PBs0dQN7OYHm1Y0rK8X0VwDMNErY6tbnwn2Ca1VhS_HMyLEWAMOqBBMA4hRUOnjitS86zyC0JcDO0AMiAIcEHjN_kxy1Ph1NJ-Pl30UpDEgVvT0JTLTU4U4TJgAIE6"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-lime-400 text-zinc-950 text-[8px] font-bold tracking-widest uppercase">Validated</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-['Space_Grotesk'] font-bold text-sm tracking-tight text-lime-400 group-hover:brightness-125">AMS1117-3.3</h3>
+<p class="text-[10px] text-zinc-500 font-['Inter'] leading-relaxed">Low Dropout Voltage Regulator. Fixed 3.3V Output, 1A Current. SOT-223 Package.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-zinc-800/50 flex items-center justify-between">
+<span class="text-[10px] font-['Space_Grotesk'] text-zinc-600">STOCK: 212_UNITS</span>
+<button class="flex items-center space-x-1 text-[9px] font-['Space_Grotesk'] font-black tracking-widest text-lime-400 group-hover:translate-x-1 transition-transform">
+<span>VIEW_IN_FINDER</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- REPEAT CARDS FOR GRID DENSITY -->
+<!-- CARD 5 -->
+<div class="bg-zinc-900/60 backdrop-blur-md border border-zinc-800 p-4 relative group hover:border-lime-400/50 transition-all cursor-pointer">
+<div class="absolute top-0 right-0 p-2 text-[8px] font-['Space_Grotesk'] text-zinc-700 tracking-tighter">ID: IC-LOG-01</div>
+<div class="h-32 w-full bg-zinc-950 border border-zinc-800 mb-4 overflow-hidden relative group-hover:border-lime-400/20 transition-all">
+<img class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity" data-alt="An abstract and artistic visualization of binary data streaming through the silicon logic of a microchip. Glowing pulses of neon green light represent bits of information traversing a complex, multi-layered grid of circuitry. The color palette is dominated by deep blacks and cool greys, allowing the vibrant green data paths to command visual attention. The mood is fast-paced and technological, capturing the essence of high-speed digital processing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4aM6-hRYWbJXsbKuxLB9Kur67xHolHbxyaQPOBr3W3xtM1dxWhB5ZpTxN6CnvKC_32AIxA-Eq3b45XhF7NoCRkkcz9Qd3uZH1Y9gKHapZ0IBLXitlbCxPAyXJX5kJhLpn8HciObZR9CWmSAeQCTp4UjPC3wSRMntrRSShWRKzFMp2P_p1n90oLZaEh3gJ3X9AFoeMnfR-sUjxrgb4DniSU70UnrTElpSzWrkkkld5ri2eIdPqx79YaGtANyFCXCnprKR1EoUxplju"/>
+</div>
+<div class="space-y-1">
+<h3 class="font-['Space_Grotesk'] font-bold text-sm tracking-tight text-lime-400 group-hover:brightness-125">74HC595_SHIFT</h3>
+<p class="text-[10px] text-zinc-500 font-['Inter'] leading-relaxed">8-bit Serial-in, Parallel-out Shift Register. 3-state outputs. High-speed CMOS logic.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-zinc-800/50 flex items-center justify-between">
+<span class="text-[10px] font-['Space_Grotesk'] text-zinc-600">STOCK: 88_UNITS</span>
+<button class="flex items-center space-x-1 text-[9px] font-['Space_Grotesk'] font-black tracking-widest text-lime-400 group-hover:translate-x-1 transition-transform">
+<span>VIEW_IN_FINDER</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- CARD 6 -->
+<div class="bg-zinc-900/60 backdrop-blur-md border border-zinc-800 p-4 relative group hover:border-lime-400/50 transition-all cursor-pointer">
+<div class="absolute top-0 right-0 p-2 text-[8px] font-['Space_Grotesk'] text-zinc-700 tracking-tighter">ID: SW-TACT-04</div>
+<div class="h-32 w-full bg-zinc-950 border border-zinc-800 mb-4 overflow-hidden relative group-hover:border-lime-400/20 transition-all">
+<img class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity" data-alt="A hyper-detailed macro photograph of a small tactile momentary switch mounted on a circuit board. The button's black plastic cap and surrounding metal frame are sharply defined against the dark PCB. A subtle neon green glow emanates from beneath the button, suggesting an active power state. The composition is stark and industrial, focusing on the mechanical precision and tactical feel of the component." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKDWtIByWJ4eqBXMIKbU3OJH0UCGqavslM3EeDLTZ3k37F8iVw0Gxtmi_SN0sMqVhpWnCNXEDubrDDoJvoKGUNXPfMTBQl4aFJs4oaQE4TcwVZzbsyLdi1fmGyyQrJQFjAS44DznyiOzlhCKc3muJ7plwuQcxnomkNkCTxsJ1qIqoW5RiCbzrxCRr2ppYiLf730ApVUZPs-JSFDq6q-77_8o-JhR8FTyCGqJSM17MrjLWIqXMTZU9tJYbggJFROiKlDsWXc1iC98KZ"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-lime-400 text-zinc-950 text-[8px] font-bold tracking-widest uppercase">Validated</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-['Space_Grotesk'] font-bold text-sm tracking-tight text-lime-400 group-hover:brightness-125">TACT_SWITCH_6MM</h3>
+<p class="text-[10px] text-zinc-500 font-['Inter'] leading-relaxed">Momentary Tactile Switch. 6x6mm Square, Through-hole. 100,000 cycle lifespan.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-zinc-800/50 flex items-center justify-between">
+<span class="text-[10px] font-['Space_Grotesk'] text-zinc-600">STOCK: 500+_UNITS</span>
+<button class="flex items-center space-x-1 text-[9px] font-['Space_Grotesk'] font-black tracking-widest text-lime-400 group-hover:translate-x-1 transition-transform">
+<span>VIEW_IN_FINDER</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- CARD 7 -->
+<div class="bg-zinc-900/60 backdrop-blur-md border border-zinc-800 p-4 relative group hover:border-lime-400/50 transition-all cursor-pointer">
+<div class="absolute top-0 right-0 p-2 text-[8px] font-['Space_Grotesk'] text-zinc-700 tracking-tighter">ID: IC-COMM-02</div>
+<div class="h-32 w-full bg-zinc-950 border border-zinc-800 mb-4 overflow-hidden relative group-hover:border-lime-400/20 transition-all">
+<img class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity" data-alt="A professional close-up of an ESP32 Wi-Fi and Bluetooth module. The distinct silver shield of the module contrasts with the dark green PCB and its intricate gold-plated antenna traces. Faint neon green light reflects off the metallic surfaces, while a technical blueprint overlay provides a sense of engineering depth. The image is clean and highly detailed, showcasing the complexity of modern wireless communication hardware." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVN2mjLIkTkUgfrPPaIiJcVWd-E3ox2MXw5zlLGOVF91FA7xgKU6zTxfKpY-AZxnAUdPY8C3bOr5uOsw5y3BUSM8-sH1guOdHGVUE-dVa5tfWx4QPQVnFxUN2tt_X_-IDzEqIkvnYE92Zd9Zp68zby0i53UYe_watKyQ0BLOpiMlGLa4IsZUKc1nDdF_RW0jnsWuF7H6tJDTb5oSg_wsqSgGrkvKtdp-z2hjam6zr32_TnBFBeRuKGDNN-FtQwZE4prTSFeO3Ag14v"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-lime-400 text-zinc-950 text-[8px] font-bold tracking-widest uppercase">Validated</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-['Space_Grotesk'] font-bold text-sm tracking-tight text-lime-400 group-hover:brightness-125">ESP32-WROOM-32E</h3>
+<p class="text-[10px] text-zinc-500 font-['Inter'] leading-relaxed">Dual-core MCU with Wi-Fi/BT/BLE support. 4MB Flash. Integrated PCB antenna.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-zinc-800/50 flex items-center justify-between">
+<span class="text-[10px] font-['Space_Grotesk'] text-zinc-600">STOCK: 32_UNITS</span>
+<button class="flex items-center space-x-1 text-[9px] font-['Space_Grotesk'] font-black tracking-widest text-lime-400 group-hover:translate-x-1 transition-transform">
+<span>VIEW_IN_FINDER</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- CARD 8 -->
+<div class="bg-zinc-900/60 backdrop-blur-md border border-zinc-800 p-4 relative group hover:border-lime-400/50 transition-all cursor-pointer">
+<div class="absolute top-0 right-0 p-2 text-[8px] font-['Space_Grotesk'] text-zinc-700 tracking-tighter">ID: PR-DISP-01</div>
+<div class="h-32 w-full bg-zinc-950 border border-zinc-800 mb-4 overflow-hidden relative group-hover:border-lime-400/20 transition-all">
+<img class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity" data-alt="A stunning photograph of a small 0.96-inch OLED display module actively powered. The screen shows sharp, bright green terminal text and fluctuating waveforms against a deep black background. Braided wires connect to the header pins, with a faint neon glow following the wire paths back to the main circuit board. The lighting is cinematic, focusing on the vibrant display and the surrounding high-tech laboratory environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAL3uSZh8VzxLIBz9C2zKE-kEuy5cEs7YK7yrOGbgI0-9wSECQB_8P0O193qcX9iAiNMXuGnUEGJjhCV01XQvPx2eUHwRk9hx3iH-dgR_CuPZ0FZ1WRa_0NKqPJSaKv5fofAYTJoiGF6ZfDa8D6xzlKlGrwqyXmsPpWrmZVsT3IFZhpj73VrCs62WTAA-NleC6YoiyA7JwfRlM3sjczbeOltUWSK19cgui6oJJ3yazkn6L2qoon5jz61xHhAm_6oCrRS8xnb1O5vzhv"/>
+<div class="absolute bottom-2 left-2 px-2 py-0.5 bg-zinc-800 text-zinc-300 text-[8px] font-bold tracking-widest uppercase">Experimental</div>
+</div>
+<div class="space-y-1">
+<h3 class="font-['Space_Grotesk'] font-bold text-sm tracking-tight text-lime-400 group-hover:brightness-125">OLED_128x64_I2C</h3>
+<p class="text-[10px] text-zinc-500 font-['Inter'] leading-relaxed">Monochrome Graphic Display. SSD1306 driver. High contrast, wide viewing angle.</p>
+</div>
+<div class="mt-4 pt-4 border-t border-zinc-800/50 flex items-center justify-between">
+<span class="text-[10px] font-['Space_Grotesk'] text-zinc-600">STOCK: 8_UNITS</span>
+<button class="flex items-center space-x-1 text-[9px] font-['Space_Grotesk'] font-black tracking-widest text-lime-400 group-hover:translate-x-1 transition-transform">
+<span>VIEW_IN_FINDER</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- FOOTER STATS -->
+<div class="mt-12 py-6 border-t border-zinc-800 flex flex-wrap gap-8 items-center justify-between">
+<div class="flex items-center space-x-8">
+<div class="space-y-1">
+<div class="text-[9px] font-bold text-zinc-600 tracking-widest uppercase">TOTAL_ASSETS</div>
+<div class="text-xl font-['Space_Grotesk'] font-bold text-lime-400">1,402</div>
+</div>
+<div class="space-y-1">
+<div class="text-[9px] font-bold text-zinc-600 tracking-widest uppercase">UNIQUE_SKUS</div>
+<div class="text-xl font-['Space_Grotesk'] font-bold text-on-surface">348</div>
+</div>
+<div class="space-y-1">
+<div class="text-[9px] font-bold text-zinc-600 tracking-widest uppercase">SYSTEM_INTEGRITY</div>
+<div class="text-xl font-['Space_Grotesk'] font-bold text-lime-400">99.9%</div>
+</div>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></div>
+<span class="text-[10px] font-['Space_Grotesk'] text-zinc-400 tracking-widest">REALTIME_DATABASE_SYNC_ACTIVE</span>
+</div>
+</div>
+</div>
+</main>
+<!-- FLOATING ACTION BUTTON (Suppressed for this context per rules, but showing structural placement if it were needed) -->
+<!-- Not rendered as per Contextual FAB Suppression rule for Library/Details screens -->
+</body></html>
